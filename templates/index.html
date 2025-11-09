@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnamese Stock Market Visualizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Vietnamese Stock Market Visualizer</h1>
+            <p class="subtitle">Analyze and visualize VN stock market data</p>
+        </header>
+
+        <div class="input-section">
+            <div class="card">
+                <h2>Stock Analysis</h2>
+                <form id="analysisForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="symbol">Stock Symbol *</label>
+                            <input type="text" id="symbol" name="symbol" placeholder="e.g., VNM, VCB, HPG" required>
+                            <button type="button" id="showStocksBtn" class="btn-secondary">Popular Stocks</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start_date">Start Date</label>
+                            <input type="date" id="start_date" name="start_date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="end_date">End Date</label>
+                            <input type="date" id="end_date" name="end_date">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary" id="analyzeBtn">
+                            <span class="btn-text">Analyze Stock</span>
+                            <span class="spinner" style="display: none;"></span>
+                        </button>
+                        <button type="button" class="btn-secondary" id="quickAnalyzeBtn">Quick Analyze (6 months)</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Popular Stocks Modal -->
+            <div id="stocksModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Popular Vietnamese Stocks</h2>
+                    <div id="stocksList" class="stocks-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" style="display: none;">
+            <!-- Summary Statistics -->
+            <div class="card">
+                <h2>Summary Statistics - <span id="summarySymbol"></span></h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Latest Price</div>
+                        <div class="stat-value" id="latestPrice">-</div>
+                        <div class="stat-sublabel" id="latestDate">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Price Change</div>
+                        <div class="stat-value" id="priceChange">-</div>
+                        <div class="stat-sublabel" id="priceChangePct">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Price Range</div>
+                        <div class="stat-value-small">
+                            <div>High: <span id="highPrice">-</span></div>
+                            <div>Low: <span id="lowPrice">-</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Volume</div>
+                        <div class="stat-value-small">
+                            <div>Avg: <span id="avgVolume">-</span></div>
+                            <div>Max: <span id="maxVolume">-</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Volatility</div>
+                        <div class="stat-value" id="volatility">-</div>
+                        <div class="stat-sublabel">Daily Std Dev</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Data Points</div>
+                        <div class="stat-value" id="dataPoints">-</div>
+                        <div class="stat-sublabel">Trading Days</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="card">
+                <h2>Interactive Candlestick Chart</h2>
+                <div class="chart-container">
+                    <iframe id="candlestickChart" class="chart-iframe"></iframe>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="card">
+                    <h3>Moving Averages</h3>
+                    <div class="chart-container">
+                        <img id="maChart" class="chart-img" alt="Moving Averages Chart">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Volume Analysis</h3>
+                    <div class="chart-container">
+                        <img id="volumeChart" class="chart-img" alt="Volume Analysis Chart">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Daily Returns</h3>
+                    <div class="chart-container">
+                        <img id="returnsChart" class="chart-img" alt="Daily Returns Chart">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <footer>
+            <p>Vietnamese Stock Market Visualizer | Powered by vnstock</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

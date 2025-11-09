@@ -42,8 +42,9 @@ Thumbs.db
 # Charts and outputs
 charts/
 example_charts/
-*.png
-*.html
+static/charts/*.png
+static/charts/*.html
+!static/charts/.gitkeep
 
 # Jupyter
 .ipynb_checkpoints/

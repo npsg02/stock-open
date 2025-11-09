@@ -1,14 +1,16 @@
 # Vietnamese Stock Market Data Visualization Tool
 
-A Python tool for visualizing Vietnamese stock market data using the `vnstock` library. This tool provides various visualization options including candlestick charts, moving averages, volume analysis, and returns distribution.
+A comprehensive tool for visualizing Vietnamese stock market data using the `vnstock` library. Available as both a **web application** and **command-line tool** with various visualization options including candlestick charts, moving averages, volume analysis, and returns distribution.
 
 ## Features
 
+- 🌐 **Web Application** - Modern, user-friendly web interface for analyzing stocks
 - 📊 **Interactive Candlestick Charts** - View OHLC data with volume in an interactive Plotly chart
 - 📈 **Moving Averages** - Visualize price trends with customizable moving averages (MA20, MA50, MA100)
 - 📉 **Volume Analysis** - Analyze trading volume with color-coded bars and moving averages
 - 💹 **Daily Returns** - View daily returns over time and distribution histogram
 - 📋 **Summary Statistics** - Get comprehensive statistics including price range, volatility, and volume metrics
+- 🚀 **Quick Analysis** - One-click analysis for popular Vietnamese stocks
 
 ## Installation
 
@@ -24,6 +26,25 @@ pip install -r requirements.txt
 ```
 
 ## Usage
+
+### Web Application (Recommended)
+
+Start the web server:
+
+```bash
+python web_app.py
+```
+
+Then open your browser and navigate to:
+```
+http://localhost:5000
+```
+
+The web interface allows you to:
+- Select from popular Vietnamese stocks or enter any stock symbol
+- Choose custom date ranges or use quick 6-month analysis
+- View all charts and statistics in one interactive dashboard
+- Export and save analysis results
 
 ### Command Line Interface
 
