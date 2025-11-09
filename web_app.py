@@ -96,9 +96,11 @@ def analyze_stock():
         })
         
     except Exception as e:
+        # Log error for debugging (don't expose stack trace to users)
         import traceback
         traceback.print_exc()
-        return jsonify({'error': str(e)}), 500
+        # Return generic error message to user
+        return jsonify({'error': 'Failed to analyze stock. Please check the symbol and try again.'}), 500
 
 
 @app.route('/api/stocks')
@@ -120,4 +122,8 @@ def get_popular_stocks():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use debug mode only for local development
+    # For production, use a WSGI server like gunicorn
+    import os
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
