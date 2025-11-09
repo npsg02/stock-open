@@ -15,14 +15,17 @@ try:
     # Try importing from vnstock 3.x
     from vnstock3 import Vnstock
     VNSTOCK_VERSION = 3
+    VNSTOCK_AVAILABLE = True
 except ImportError:
     try:
         # Fallback to vnstock 0.x
         from vnstock import stock_historical_data
         VNSTOCK_VERSION = 0
+        VNSTOCK_AVAILABLE = True
     except ImportError:
-        print("Error: vnstock library not found. Please install it using: pip install vnstock")
-        exit(1)
+        VNSTOCK_AVAILABLE = False
+        VNSTOCK_VERSION = None
+        # Don't exit here - allow usage with manual data injection for testing
 
 
 class VNStockVisualizer:
@@ -55,6 +58,10 @@ class VNStockVisualizer:
         
     def fetch_data(self):
         """Fetch stock data using vnstock library"""
+        if not VNSTOCK_AVAILABLE:
+            print("Error: vnstock library not found. Please install it using: pip install vnstock")
+            return False
+            
         try:
             print(f"Fetching data for {self.symbol} from {self.start_date} to {self.end_date}...")
             

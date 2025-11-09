@@ -125,11 +125,38 @@ optional arguments:
 
 ## Dependencies
 
-- **vnstock** (1.0.28) - Vietnamese stock data library
-- **pandas** (2.0.3) - Data manipulation and analysis
-- **matplotlib** (3.7.2) - Static chart generation
-- **plotly** (5.17.0) - Interactive chart generation
-- **numpy** (1.24.3) - Numerical computing
+- **vnstock** (>=3.2.6) - Vietnamese stock data library
+- **pandas** (>=2.0.0) - Data manipulation and analysis
+- **matplotlib** (>=3.7.0) - Static chart generation
+- **plotly** (>=5.17.0) - Interactive chart generation
+- **numpy** (>=1.24.0) - Numerical computing
+
+## Troubleshooting
+
+### Installation Issues
+
+If you encounter issues installing vnstock, try these alternatives:
+
+```bash
+# Option 1: Install with specific version
+pip install vnstock==3.2.6
+
+# Option 2: Install latest version
+pip install vnstock
+
+# Option 3: Install with no cache (if download issues)
+pip install --no-cache-dir vnstock
+```
+
+### Testing Without vnstock
+
+To test the visualization functionality without installing vnstock (useful for development):
+
+```bash
+python test_visualizer.py
+```
+
+This will run tests using mock data to verify all visualization functions work correctly.
 
 ## License
 
